@@ -1,2 +1,5 @@
 admin:
   Entry: all
+
+public_user:
+  Entry: read
