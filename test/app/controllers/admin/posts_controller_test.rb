@@ -275,8 +275,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "render index and return csv" do
       expected = <<-RAW
-title;status
-#{@post.title};#{@post.status}
+title,status
+#{@post.title},#{@post.status}
        RAW
 
       get :index, :format => "csv"
