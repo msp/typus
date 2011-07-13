@@ -85,6 +85,7 @@ ActiveRecord::Schema.define do
     t.datetime :published_at
     t.integer :typus_user_id
     t.boolean :published
+    t.integer :sort_order
     t.timestamps
   end
 

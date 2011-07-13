@@ -49,6 +49,9 @@ module Typus
 <a href="http://core.typuscms.com/">typus</a> by <a href="http://intraducibles.com">intraducibles.com</a>
   CODE
 
+  mattr_accessor :blacklist
+  @@blacklist = ["sort_order", "action"]
+
   ##
   # Available Authentication Mechanisms are:
   #

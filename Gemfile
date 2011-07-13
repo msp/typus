@@ -13,6 +13,8 @@ gem 'factory_girl'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '~> 3.0'
+gem 'guard'
+gem 'guard-test'
 
 group :test do
   gem 'shoulda-context'
@@ -33,7 +35,7 @@ group :development, :test do
 
   platforms :ruby do
     gem 'mysql2', '0.2.7'
-    gem 'pg'
+#    gem 'pg'
     gem 'sqlite3'
   end
 

@@ -139,4 +139,22 @@ class TypusTest < ActiveSupport::TestCase
 
   end
 
+  should "verify blacklist loaded" do
+    assert Typus.blacklist.size >= 0
+  end
+
+  should "verify default config for blacklist" do
+    assert_equal ["sort_order", "action"], Typus.blacklist
+  end
+
+  should "verify user assignment merge with default blacklist" do
+    expected = ["sort_order", "action", "test1", "test2"]
+
+    Typus.setup do |config|
+      config.blacklist.concat(["test1", "test2"])
+    end
+
+    assert_equal expected, Typus.blacklist
+  end
+
 end

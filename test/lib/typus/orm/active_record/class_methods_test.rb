@@ -35,6 +35,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
                   [:published_at, :datetime],
                   [:typus_user_id, :integer],
                   [:published, :boolean],
+                  [:sort_order, :integer],
                   [:created_at, :datetime],
                   [:updated_at, :datetime]]
 

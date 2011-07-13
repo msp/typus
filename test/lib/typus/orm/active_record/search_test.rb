@@ -184,6 +184,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert Post.build_conditions(params).is_a?(Array)
     end
 
+    should "exclude blacklist items from search parameters" do
+      Factory(:post, :sort_order => 1)
+
+      Post.build_conditions({:order_by => "name", :status => "published", :sort_order => 1, :action => "test"}).each do |h|
+        assert(!h.has_key?(:sort_order), "#{h} contains :sort_order")
+      end
+
+    end
+
     should "return_sql_conditions_on_search_for_typus_user" do
       expected = case ENV["DB"]
                  when "postgresql"
@@ -295,7 +304,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       params = { :role => "admin" }
       assert_equal params, TypusUser.build_conditions(params).first
     end
-
   end
 
   context "build_joins" do

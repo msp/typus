@@ -13,7 +13,7 @@ class String
   end
 
   def typus_constantize
-    Typus::Configuration.models_constantized[self]
+    Typus::Configuration.models_constantized![self]
   end
 
   def acl_action_mapper

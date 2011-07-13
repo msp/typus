@@ -399,16 +399,16 @@ title;status
 
       should "verify_typus_user_id_of_item_when_creating_record" do
         assert_difference('Post.count') do
-          post :create, :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." }
+          post :create, :post => {:title => "Chunky Bacon", :body => "Lorem ipsum ..."}
         end
 
         assert_equal @request.session[:typus_user_id], assigns(:item).typus_user_id
       end
 
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
-        [ 108, nil ].each do |typus_user_id|
+        [108, nil].each do |typus_user_id|
           post_ = Factory(:post, :typus_user => @typus_user)
-          post :update, :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id }
+          post :update, :id => post_.id, :post => {:title => 'Updated', :typus_user_id => @typus_user.id}
           post_updated = Post.find(post_.id)
           assert_equal @request.session[:typus_user_id], post_updated.typus_user_id
         end
@@ -477,7 +477,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => comment.id, :association_name => 'comments' } }
+        post :relate, {:id => @post.id, :related => {:model => 'Comment', :id => comment.id, :association_name => 'comments'}}
       end
 
       assert_response :redirect
@@ -490,7 +490,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => "", :association_name => 'comments' } }
+        post :relate, {:id => @post.id, :related => {:model => 'Comment', :id => "", :association_name => 'comments'}}
       end
 
       assert_response :redirect
@@ -503,7 +503,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => nil, :association_name => 'comments' } }
+        post :relate, {:id => @post.id, :related => {:model => 'Comment', :id => nil, :association_name => 'comments'}}
       end
 
       assert_response :redirect
@@ -516,7 +516,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
       assert_difference('category.posts.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id, :association_name => 'categories' } }
+        post :relate, {:id => @post.id, :related => {:model => 'Category', :id => category.id, :association_name => 'categories'}}
       end
 
       assert_response :redirect
@@ -675,7 +675,7 @@ title;status
   context "create_with_back_to" do
 
     setup do
-      @post = { :title => 'This is another title', :body => 'Body' }
+      @post = {:title => 'This is another title', :body => 'Body'}
     end
 
     context "when creating an item" do
@@ -699,8 +699,8 @@ title;status
 
       should "create new post and redirect to view" do
         assert_difference('Post.count') do
-          post :create, { :post => @post,
-                          :resource => "View" }
+          post :create, {:post => @post,
+                         :resource => "View"}
         end
         assert_response :redirect
         assert_redirected_to "/admin/views/new?post_id=#{Post.last.id}"
@@ -727,7 +727,7 @@ title;status
 
       should "create new post and redirect to view" do
         assert_difference('Post.count') do
-          post :create, { :post => @post, :resource => "View", :resource_id => @view.id }
+          post :create, {:post => @post, :resource => "View", :resource_id => @view.id}
         end
         assert_response :redirect
         assert_redirected_to "/admin/views/edit/#{@view.id}"
@@ -747,7 +747,7 @@ title;status
     end
 
     should "work and return a json hash with ten items" do
-      get :autocomplete, { :term => "Post" }
+      get :autocomplete, {:term => "Post"}
       assert_response :success
       assert_equal 20, assigns(:items).size
     end
@@ -756,11 +756,11 @@ title;status
       post = Post.first
       post.update_attributes(:title => "fesplugas")
 
-      get :autocomplete, { :term => "jmeiss" }
+      get :autocomplete, {:term => "jmeiss"}
       assert_response :success
       assert_equal 0, assigns(:items).size
 
-      get :autocomplete, { :term => "fesplugas" }
+      get :autocomplete, {:term => "fesplugas"}
       assert_response :success
       assert_equal 1, assigns(:items).size
     end

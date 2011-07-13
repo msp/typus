@@ -84,6 +84,10 @@ module Typus
               !(k.to_sym == :search)
             end
 
+            query_params.reject! do |k, v |
+              Typus.blacklist.include?(k.to_s)
+            end
+
             query_params.compact.each do |key, value|
               filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
               conditions << send("build_#{filter_type}_conditions", key, value)
