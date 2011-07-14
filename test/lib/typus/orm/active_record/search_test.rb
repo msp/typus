@@ -189,6 +189,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       Post.build_conditions({:order_by => "name", :status => "published", :sort_order => 1, :action => "test"}).each do |h|
         assert(!h.has_key?(:sort_order), "#{h} contains :sort_order")
+        assert(!h.has_key?(:action), "#{h} contains :action")
       end
 
     end
