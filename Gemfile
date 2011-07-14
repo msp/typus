@@ -13,8 +13,7 @@ gem 'factory_girl'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '~> 3.0'
-gem 'guard'
-gem 'guard-test'
+
 
 group :test do
   gem 'shoulda-context'
@@ -31,12 +30,15 @@ group :development, :test do
     gem 'jdbc-sqlite3'
 
     gem 'jruby-openssl' # JRuby limited openssl loaded. http://jruby.org/openssl
+
   end
 
   platforms :ruby do
     gem 'mysql2', '0.2.7'
-#    gem 'pg'
+    gem 'pg'
     gem 'sqlite3'
+    gem 'guard'
+	  gem 'guard-test'
   end
 
 end
