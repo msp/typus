@@ -26,4 +26,10 @@ Typus.setup do |config|
   # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
   #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
+  # Blacklist options:
+  # Add words in here that should be excluded from the search parameters to avoid clashes.
+  # Examples are sort_order  or  action. Add your own words by uncommenting the line below and replacing the strings
+  # with your own ones.
+  # config.blacklist.concat(["your_word1", "your_word2"])
+
 end
